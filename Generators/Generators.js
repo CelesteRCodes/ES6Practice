@@ -1,47 +1,44 @@
-// what is a generator?
-// function that can enter/exit many times
-// run some code, return a value, return back to same place and continue running
-
-// what does it do?
-
-// iteration with generators
-
-// generator delegation
-
-// generators with symbol.iterator
-
-// function* numbers() {
-//   // function *numbers(){}
-//   yield;
-// }
-
-// console.log(numbers());
-// const gen = numbers();
-// gen.next();
-// // {"done": false}
-// gen.next();
-// // {"done": true}
-
-function* shopping() {
-  // stuff while walking outside
-  // walking down sidewalk
-  // go into store with cash
-  const stuffFromStore = yield "cash";
-
-  // walking back home
-  return stuffFromStore;
+function* colors() {
+  yield "red";
+  yield "blue";
+  yield "green";
 }
 
-// stuff while walking in store
-
-const gen = shopping();
-// calling gen does nothing, gen.next() starts executing the code
-
+const gen = colors();
 gen.next();
-// leaving our house
-// walked into store
-// walking up/down aisles
-// purchase stuff
+gen.next();
+gen.next();
+gen.next();
+// "done": true; no more yield statements
 
-gen.next("groceries");
-//  leaving store with groceries
+// generators work with forOf loops
+
+const myColors = [];
+for (let color of colors()) {
+  myColors.push(color);
+}
+
+myColors;
+// forOf loop is ran 3 times (output of 3 before array)
+
+const engineeringTeam = {
+  size: 3,
+  department: "Dev",
+  lead: "Celeste",
+  manager: "Alex",
+  engineer: "Dave",
+};
+
+function* TeamIterator(team) {
+  yield team.lead;
+  yield team.manager;
+  yield team.engineer;
+}
+
+const names = [];
+
+for (let name of TeamIterator(engineeringTeam)) {
+  names.push(name);
+}
+
+console.log(names);
